@@ -35,15 +35,15 @@ a:active {
 <?php
 include("nav.php");
 ?>
-<form method='post' action='Index.php' enctype="multipart/form-data">
+<form method='post' action='Register.php'>
 <label for="user">User:</label>
 <input type='text' name='user' class='input'>
 <br>
 <label for="pass">Pass:</label>
 <input type='password' name='pass' class='input'>
 <br>
-<label for="file">File:</label>
-<input type='file' name='file' id="file" class='input'>
+<label for="cpass">Repeat Pass:</label>
+<input type='password' name='cpass' class='input'>
 <br>
 <input type='submit' value='Submit' name='submit' class='input'>
 <br>
@@ -53,57 +53,42 @@ error_reporting(0);
 ob_start();
 $user = $_POST['user'];
 $pass = $_POST['pass'];
+$cpass = $_POST['cpass'];
 $user = strip_tags($user);
 $pass = strip_tags($pass);
+$cpass = strip_tags($cpass);
 $user = stripslashes($user);
 $pass = stripslashes($pass);
+$cpass = stripslashes($cpass);
 $user = mysql_real_escape_string($user);
 $pass = mysql_real_escape_string($pass);
-$pass = hash('sha256', $pass);
-
+$cpass = mysql_real_escape_string($cpass);
 include ("Config.php");
-
-$folder = './'.$user.'/';
-$name = $folder . basename($_FILES['file']['name']);
-$photo = randomname().'.png';
-$newname = $folder.$photo;
-
 if (isset($_POST['submit'])) {
-if (isset($user)){
-if (isset($pass)){
-
-mysql_connect("$host", "$username", "$password")or die("ERROR!"); 
-mysql_select_db("$db_name")or die("ERROR!");
-$sql="SELECT * FROM $tbl_name WHERE username='$user' and password='$pass'";
-$result=mysql_query($sql);
-$count=mysql_num_rows($result);
-
-if($count==1){
-
-	if (!file_exists($user)){
-		mkdir($user);
+if ($user&&$pass&&$cpass) {
+if ($pass==$cpass) {
+	
+	$pass = hash('sha256', $pass);
+	$cpass = hash('sha256', $cpass);
+	
+	mysql_connect("$host", "$username", "$password")or die("ERROR!"); 
+	mysql_select_db("$db_name")or die("ERROR!");
+	$sql="SELECT * FROM $tbl_name WHERE username='$user' and password='$pass'";
+	$result=mysql_query($sql);
+	$count=mysql_num_rows($result);
+	
+	if ($count==0){
+	$run="
+	INSERT INTO users VALUES ('$user','$pass')
+	";
+	$done=mysql_query($run);
+	echo 'Done!';
+	} else {
+	echo 'User Already Exists!';
 	}
-if ($_FILES["file"]["type"] == "image/png"){
-	 move_uploaded_file($_FILES['file']['tmp_name'],$name);
-	 rename($name,$newname);
-	 echo '<br><textarea rows="5" cols="70" id="editor" class="input">http://r4tmcserver.zapto.org/mcss/Photo.php?user='.$user.'&photo='.$photo.'</textarea>';
+	
 }
 }
-}
-}
-}
-function randomname() {
-$chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-srand((double)microtime()*1000000);
-$pass = '';
-$i = 0;
-while($i <= 8) {
-$num = rand() % 33;
-$tmp = substr($chars, $num, 1);
-$pass = $pass . $tmp;
-$i++;
-}
-return $pass;
 }
 ob_end_flush();
 ?>

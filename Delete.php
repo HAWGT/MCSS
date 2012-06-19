@@ -54,6 +54,8 @@ ob_start();
 $user = $_POST['user'];
 $pass = $_POST['pass'];
 $photo = $_POST['file'];
+$user = strip_tags($user);
+$pass = strip_tags($pass);
 $user = stripslashes($user);
 $pass = stripslashes($pass);
 $user = mysql_real_escape_string($user);
