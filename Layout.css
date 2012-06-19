@@ -1,0 +1,31 @@
+/* CSS Document */
+
+.input {
+background-color: #000000;
+color: #00ffff;
+border-radius: 8px;
+border: 2px solid #00CCFF;
+box-shadow: 0 0 10px #00CCFF;
+outline: none;
+resize: none;
+}
+
+#nav {
+background-color: #000000;
+color: #00ffff;
+margin: auto;
+height: 30px;
+font-size: 25px;
+}
+
+h1 {
+	color: #00FFFF;
+      text-shadow: 0 0 10px #ffffff,
+                   0 0 20px #ffffff,
+                   0 0 30px #ffffff,
+                   0 0 40px #00ff00,
+                   0 0 70px #00ff00,
+                   0 0 80px #00ff00,
+                   0 0 100px #00ff00,
+                   0 0 150px #00ff00;
+}
