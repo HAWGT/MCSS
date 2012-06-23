@@ -17,4 +17,6 @@ How to Install:
 
 6-Put files in htdocs
 
+8-Edit PHP files(replace r4tmcserver.zapto.org domain by your own)
+
 7-Have fun!
