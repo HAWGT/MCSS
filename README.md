@@ -1,7 +1,7 @@
 MCSS
 ====
 
-Share Minecraft Screenshots
+Share Minecraft Screenshots/Skins/Capes
 
 How to Install:
 

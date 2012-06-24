@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Minecraft Screenshot Sharing</title>
+<title>Minecraft Database</title>
 <link rel="stylesheet" type="text/css" href="Layout.css" />
 <script type='text/javascript' src='Scripts.js'></script>
 <style type="text/css">
@@ -31,7 +31,7 @@ a:active {
 </head>
 <body>
 <center>
-<h1>Minecraft Screenshot Sharing</h1>
+<h1>Minecraft Database</h1>
 <?php
 include("nav.php");
 ?>
